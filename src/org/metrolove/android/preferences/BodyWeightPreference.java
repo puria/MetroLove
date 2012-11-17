@@ -16,9 +16,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package name.bagi.levente.pedometer.preferences;
+package org.metrolove.android.preferences;
 
-import name.bagi.levente.pedometer.R;
+import org.metrolove.android.R;
+
 import android.content.Context;
 import android.preference.EditTextPreference;
 import android.util.AttributeSet;

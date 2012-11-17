@@ -1,4 +1,4 @@
-package name.bagi.levente.pedometer.preferences;
+package org.metrolove.android.preferences;
 
 import android.content.Context;
 import android.os.Bundle;

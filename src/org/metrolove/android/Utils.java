@@ -1,4 +1,4 @@
-package name.bagi.levente.pedometer;
+package org.metrolove.android;
 
 import java.util.Locale;
 

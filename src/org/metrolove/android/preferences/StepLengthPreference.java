@@ -16,36 +16,34 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package name.bagi.levente.pedometer;
+package org.metrolove.android.preferences;
+
+import org.metrolove.android.R;
 
 import android.content.Context;
-import android.os.Vibrator;
+import android.preference.EditTextPreference;
+import android.util.AttributeSet;
 
 /**
- * Vibrates whenever a step is detected.
- * Normally, this is not attached, used for debugging purposes.
+ * An {@link EditTextPreference} that only allows float values.
  * @author Levente Bagi
  */
-public class StepBuzzer implements StepListener {
-    
-    private Context mContext;
-    private Vibrator mVibrator;
-    
-    public StepBuzzer(Context context) {
-        mContext = context;
-        mVibrator = (Vibrator)mContext.getSystemService(Context.VIBRATOR_SERVICE);
-    }
-    
-    public void onStep() {
-        buzz();
-    }
-    
-    public void passValue() {
-        
-    }
-    
-    private void buzz() {
-        mVibrator.vibrate(50);
-    }
+public class StepLengthPreference extends EditMeasurementPreference {
+
+	public StepLengthPreference(Context context) {
+		super(context);
+	}
+	public StepLengthPreference(Context context, AttributeSet attr) {
+		super(context, attr);
+	}
+	public StepLengthPreference(Context context, AttributeSet attr, int defStyle) {
+		super(context, attr, defStyle);
+	}
+
+	protected void initPreferenceDetails() {
+		mTitleResource = R.string.step_length_setting_title;
+		mMetricUnitsResource = R.string.centimeters;
+		mImperialUnitsResource = R.string.inches;
+	}
 }
 

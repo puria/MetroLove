@@ -16,7 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package name.bagi.levente.pedometer;
+package org.metrolove.android;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -366,7 +366,7 @@ public class StepService extends Service {
                 System.currentTimeMillis());
         notification.flags = Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
         Intent pedometerIntent = new Intent();
-        pedometerIntent.setComponent(new ComponentName(this, Pedometer.class));
+        pedometerIntent.setComponent(new ComponentName(this, MetroLove.class));
         pedometerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 pedometerIntent, 0);
