@@ -7,14 +7,14 @@
     <string name="stopped">Sexmeter stopped.</string>
 
     <string name="steps">corsa</string>
-    <string name="kilometers">kilometers</string>
-    <string name="miles">miles</string>
-    <string name="steps_per_minute">steps / minute</string>
-    <string name="kilometers_per_hour">kilometers / hour</string>
-    <string name="miles_per_hour">miles / hour</string>
+    <string name="kilometers">kilometri</string>
+    <string name="miles">miglia</string>
+    <string name="steps_per_minute">ficcaggi / minute</string>
+    <string name="kilometers_per_hour">km/h</string>
+    <string name="miles_per_hour">miles/hour</string>
     <string name="calories_burned">calories burned</string>
     <string name="centimeters">centimeters</string>
-    <string name="inches">inches</string>
+    <string name="inches">centimetri</string>
     <string name="kilograms">kilograms</string>
     <string name="pounds">pounds</string>
 
@@ -26,35 +26,35 @@
     <string name="reset">Reset</string>
     
     <!-- Settings -->
-    <string name="settings">Settings</string>
-    <string name="activity_settings">Sexmeter Settings</string>
+    <string name="settings">Impostazioni</string>
+    <string name="activity_settings">Sexmeter impostazioni</string>
     <string name="steps_settings_title">Basic Settings</string>
-    <string name="sensitivity_setting">Sensitivity</string>
-    <string name="sensitivity_setting_details">Calibrate the step detector</string>
-    <string name="sensitivity_setting_title">Select sensitivity level</string>
-    <string name="extra_high">extra high</string>
-    <string name="very_high">very high</string>
-    <string name="high">high</string>
-    <string name="higher">higher</string>
-    <string name="medium">medium</string>
-    <string name="lower">lower</string>
-    <string name="low">low</string>
-    <string name="very_low">very low</string>
-    <string name="extra_low">extra low</string>
-    <string name="operation_level_setting">Operational level</string>
-    <string name="operation_level_setting_details">Some OS versions prevent using sensors when the screen is off; set the level that works for you</string>
-    <string name="operation_level_setting_title">Select operational level</string>
-    <string name="run_in_background">Normal (just try running in background)</string>
-    <string name="keep_screen_on">Screen on (keep screen dim)</string>
-    <string name="wake_up">Aggressive (wake up when I turn screen off)</string>
-    <string name="units_setting">Units</string>
-    <string name="units_setting_details">Imperial or metric units</string>
-    <string name="units_setting_title">Choose your units</string>
-    <string name="units_metric">metric (kilometers)</string>
-    <string name="units_imperial">imperial (miles)</string>
-    <string name="step_length_setting">Step length</string>
-    <string name="step_length_setting_details">For distance, speed &amp; calorie calculation</string>
-    <string name="step_length_setting_title">Enter your step length</string>
+    <string name="sensitivity_setting">Sensibilità</string>
+    <string name="sensitivity_setting_details">Calibrazione della sensibilità dei movimenti</string>
+    <string name="sensitivity_setting_title">Selezione la sensibilità</string>
+    <string name="extra_high">extra alta</string>
+    <string name="very_high">molto alta</string>
+    <string name="high">alta</string>
+    <string name="higher">altissima</string>
+    <string name="medium">media</string>
+    <string name="lower">bassissima</string>
+    <string name="low">bassa</string>
+    <string name="very_low">molto bassa</string>
+    <string name="extra_low">extra bassa</string>
+    <string name="operation_level_setting">Livello operativo</string>
+    <string name="operation_level_setting_details">Alcune versioni di OS prevengono l\'uso dei sensori quando lo schermo è spento; Imposta il livello che meglio funziona per te</string>
+    <string name="operation_level_setting_title">Seleziona il livello operativo</string>
+    <string name="run_in_background">Normale</string>
+    <string name="keep_screen_on">Tiene lo schermo accesso</string>
+    <string name="wake_up">Sempre attivo</string>
+    <string name="units_setting">Unità di misura</string>
+    <string name="units_setting_details">Unità metriche o imperiali</string>
+    <string name="units_setting_title">Scegli l\'unità di misura</string>
+    <string name="units_metric">metric (kilometri)</string>
+    <string name="units_imperial">imperial (miglia)</string>
+    <string name="step_length_setting">Corsa del pisello</string>
+    <string name="step_length_setting_details">Per il calcolare il percorso. (Default 12 cm.)</string>
+    <string name="step_length_setting_title">Inserisci la corsa del tuo pisello</string>
     <string name="body_weight_setting">Body weight</string>
     <string name="body_weight_setting_details">For calorie calculation</string>
     <string name="body_weight_setting_title">Enter your body weight</string>
@@ -93,7 +93,7 @@
     <string name="tell_calories_setting_details"></string>
     <string name="tell_fasterslower_setting">Faster/slower</string>
     <string name="tell_fasterslower_setting_details">Helps you maintain your desired pace or speed (interval doesn\'t apply)</string>
-    <string name="incorrect_step_length">Incorrect step length format! Go to the Settings to change it!</string>
+    <string name="incorrect_step_length">Incorrect length format! Go to the Settings to change it!</string>
 
     <string name="quit">Quit</string>
 

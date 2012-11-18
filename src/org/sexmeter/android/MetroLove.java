@@ -1,6 +1,8 @@
 package org.sexmeter.android;
 
-import org.sexmeter.android.R;
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -8,31 +10,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.facebook.android.AsyncFacebookRunner;
-import com.facebook.android.DialogError;
-import com.facebook.android.Facebook;
-import com.facebook.android.Facebook.DialogListener;
-import com.facebook.android.FacebookError;
+import com.googlecode.androidannotations.annotations.Background;
 import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.Transactional;
+import com.googlecode.androidannotations.annotations.SystemService;
 
 @EActivity(R.layout.main)
 public class MetroLove extends Activity {
-	private static final String TAG = "SexMeter";
+	private static final String TAG = "SEXMETER";
 	private SharedPreferences mSettings;
 	private PedometerSettings mPedometerSettings;
-	private Utils mUtils;
 
 	private TextView mStepValueView;
 	// private TextView mPaceValueView;
@@ -40,8 +41,8 @@ public class MetroLove extends Activity {
 	// private TextView mSpeedValueView;
 	// private TextView mCaloriesValueView;
 	TextView mDesiredPaceView;
-	private int mStepValue;
-	private int mPaceValue;
+	private int mStepValue = 0;
+	private int mPaceValue = 0;
 	private float mDistanceValue;
 	private float mSpeedValue;
 	private int mCaloriesValue;
@@ -50,43 +51,21 @@ public class MetroLove extends Activity {
 	private boolean mIsMetric;
 	private float mMaintainInc;
 	private boolean mQuitting = false;
-
-	//Facebook facebook = new Facebook("331840333589522");
-	//AsyncFacebookRunner mAsyncRunner = new AsyncFacebookRunner(facebook);
-
-	/**
-	 * True, when service is running.
-	 */
 	private boolean mIsRunning;
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		Log.i(TAG, "[ACTIVITY] onCreate");
+	@SystemService
+	LocationManager locationManager;
+	RoccoAPI api = RoccoAPI.INSTANCE;
+
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		mStepValue = mPaceValue = 0;
-		mUtils = Utils.getInstance();
-
-//		facebook.authorize(this, new DialogListener() {
-//			@Override
-//			public void onComplete(Bundle values) {
-//				System.out.println(values);
-//			}
-//
-//			@Override
-//			public void onFacebookError(FacebookError error) {
-//			}
-//
-//			@Override
-//			public void onError(DialogError e) {
-//			}
-//
-//			@Override
-//			public void onCancel() {
-//			}
-//		});
-	}
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+		String bestProvider = locationManager.getBestProvider(criteria, true);
+		Location location = locationManager.getLastKnownLocation(bestProvider);
+		locationManager.requestLocationUpdates(bestProvider, 10000, 10, listener);
+		api.setCurrentLocation(location);
+	};
 
 	@Override
 	protected void onStart() {
@@ -101,8 +80,6 @@ public class MetroLove extends Activity {
 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 		mPedometerSettings = new PedometerSettings(mSettings);
-
-		mUtils.setSpeak(mSettings.getBoolean("speak", false));
 
 		// Read from preferences if the service was running on the last onPause
 		mIsRunning = mPedometerSettings.isServiceRunning();
@@ -210,7 +187,49 @@ public class MetroLove extends Activity {
 	protected void onStop() {
 		Log.i(TAG, "[ACTIVITY] onStop");
 		super.onStop();
+		this.stopStepService();
+		String device_id = Secure.getString(getBaseContext().getContentResolver(),
+				Secure.ANDROID_ID);
+		this.addStatistics(mDistanceValue, device_id);
+		this.resetValues(true);
+		locationManager.removeUpdates(listener);
 	}
+	
+	@Background
+	void addStatistics(float mDistanceValue2, String device_id) {
+		try {
+			api.addStatistic(mDistanceValue2 + "", device_id);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private final LocationListener listener = new LocationListener() {
+		@Override
+		public void onLocationChanged(Location location) {
+			api.setCurrentLocation(location);
+		}
+
+		@Override
+		public void onProviderDisabled(String arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void onProviderEnabled(String arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+			// TODO Auto-generated method stub
+
+		}
+	};
 
 	protected void onDestroy() {
 		Log.i(TAG, "[ACTIVITY] onDestroy");
@@ -222,11 +241,6 @@ public class MetroLove extends Activity {
 		super.onDestroy();
 	}
 
-	@Transactional
-	void save(SQLiteDatabase db) {
-	    db.execSQL("Some SQL");
-	}
-	
 	private void setDesiredPaceOrSpeed(float desiredPaceOrSpeed) {
 		if (mService != null) {
 			if (mMaintain == PedometerSettings.M_PACE) {

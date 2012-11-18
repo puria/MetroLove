@@ -8,13 +8,43 @@
     android:orientation="vertical"
     android:scaleType="center" >
 
-    <Button
+    <LinearLayout
         android:id="@+id/play"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/btn_play_bg"
-        android:text="Button" />
+        android:background="@drawable/btn_play_bg" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/btn_play_text" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/play"
+        android:src="@drawable/numeri" />
+
+    <TextView
+        android:id="@+id/personal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:paddingTop="@dimen/padding"
+        android:textSize="@dimen/value" />
 
 </RelativeLayout>
