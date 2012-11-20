@@ -25,7 +25,6 @@ public class Dashboard extends Activity {
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		this.getMyStatistics();
 	}
@@ -33,6 +32,11 @@ public class Dashboard extends Activity {
 	@Click
 	void play() {
 		startActivity(new Intent(this, MetroLove_.class));
+	}
+	
+	@Click
+	void gotoStatistiche() {
+		startActivity(new Intent(this, GlobalStatisticsActivity_.class));
 	}
 	
 	@Background

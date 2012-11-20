@@ -45,6 +45,15 @@
         android:paddingLeft="@dimen/padding"
         android:paddingRight="@dimen/padding"
         android:paddingTop="@dimen/padding"
-        android:textSize="@dimen/value" />
+        android:textSize="@dimen/value" 
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/gotoStatistiche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Statistiche" />
 
 </RelativeLayout>

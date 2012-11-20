@@ -22,9 +22,9 @@ import org.apache.http.params.BasicHttpParams;
 import android.location.Location;
 
 public class RoccoAPI extends GenericAPI {
-	public final static String DOMAIN = "localhost";
+	public final static String DOMAIN = "rocco.sexmeter.org";
 	public final static String SITE_BASE_URL = "http://" + DOMAIN;
-	public final static String BASE_URL = "http://192.168.43.121:8080/";
+	public final static String BASE_URL = "http://rocco.sexmeter.org/";
 
 	private DefaultHttpClient mClient;
 	private Location currentLocation;
@@ -32,15 +32,10 @@ public class RoccoAPI extends GenericAPI {
 	public static RoccoAPI INSTANCE = new RoccoAPI();
 
 	private RoccoAPI() {
-		// try {
-		// InetAddress.getByName(DOMAIN);
-		// } catch (UnknownHostException e) {
-		// e.printStackTrace();
-		// }
 		BasicHttpParams params = new BasicHttpParams();
 		SchemeRegistry schemeRegistry = new SchemeRegistry();
 		schemeRegistry.register(new Scheme("http", PlainSocketFactory
-				.getSocketFactory(), 8080));
+				.getSocketFactory(), 80));
 		final SSLSocketFactory sslSocketFactory = SSLSocketFactory
 				.getSocketFactory();
 		schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
@@ -66,6 +61,48 @@ public class RoccoAPI extends GenericAPI {
 		this.mClient.execute(request);
 	}
 	
+	public String getSouthItalianStatistics() {
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+		HttpGet request = makeRequest("south", params);
+		HttpResponse response = null;
+		try {
+			response = this.mClient.execute(request);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return parseResponseToString(response);
+	}
+	
+	public String getNorthItalianStatistics() {
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+		HttpGet request = makeRequest("north", params);
+		HttpResponse response = null;
+		try {
+			response = this.mClient.execute(request);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return parseResponseToString(response);
+	}
+	
+	public String getItalianStatistics() {
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+		HttpGet request = makeRequest("italians", params);
+		HttpResponse response = null;
+		try {
+			response = this.mClient.execute(request);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return parseResponseToString(response);
+	}
+	
 	public String getPersonalStatistics(String device_id) {
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
 		params.add(new BasicNameValuePair("device_id", device_id));
@@ -88,21 +125,6 @@ public class RoccoAPI extends GenericAPI {
 	public Location getCurrentLocation() {
 		return this.currentLocation;
 	}
-
-	//
-	// private String executeRequest(List<NameValuePair> params) throws
-	// ClientProtocolException, IOException {
-	// HttpGet request = makeRequest(params);
-	// HttpResponse response = null;
-	// try {
-	// response = this.mClient.execute(request);
-	// } catch (Exception e) {
-	// }
-	// if (response != null)
-	// return parseResponseToString(response);
-	// else
-	// return "";
-	// }
 
 	private HttpGet makeRequest(String method, List<NameValuePair> params) {
 		String paramString = URLEncodedUtils.format(params, "utf-8");

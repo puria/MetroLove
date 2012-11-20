@@ -419,15 +419,6 @@ public class MetroLove extends Activity {
 				mStepValue = (int) msg.arg1;
 				mStepValueView.setText("" + mStepValue);
 				break;
-			// case PACE_MSG:
-			// mPaceValue = msg.arg1;
-			// if (mPaceValue <= 0) {
-			// mPaceValueView.setText("0");
-			// }
-			// else {
-			// mPaceValueView.setText("" + (int)mPaceValue);
-			// }
-			// break;
 			case DISTANCE_MSG:
 				mDistanceValue = ((int) msg.arg1) / 1000f;
 				if (mDistanceValue <= 0) {
@@ -437,27 +428,6 @@ public class MetroLove extends Activity {
 							.setText(("" + (mDistanceValue + 0.000001f))
 									.substring(0, 5));
 				}
-				// break;
-				// case SPEED_MSG:
-				// mSpeedValue = ((int)msg.arg1)/1000f;
-				// if (mSpeedValue <= 0) {
-				// mSpeedValueView.setText("0");
-				// }
-				// else {
-				// mSpeedValueView.setText(
-				// ("" + (mSpeedValue + 0.000001f)).substring(0, 4)
-				// );
-				// }
-				// break;
-				// case CALORIES_MSG:
-				// mCaloriesValue = msg.arg1;
-				// if (mCaloriesValue <= 0) {
-				// mCaloriesValueView.setText("0");
-				// }
-				// else {
-				// mCaloriesValueView.setText("" + (int)mCaloriesValue);
-				// }
-				// break;
 			default:
 				super.handleMessage(msg);
 			}

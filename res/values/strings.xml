@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sexmeter</string>
-    <string name="notification_subtitle">Counting your ficcate</string>
+    <string name="notification_subtitle">Sto contando le tue ficcate</string>
 
     <string name="started">Sexmeter started.</string>
     <string name="stopped">Sexmeter stopped.</string>
@@ -95,6 +95,10 @@
     <string name="tell_fasterslower_setting_details">Helps you maintain your desired pace or speed (interval doesn\'t apply)</string>
     <string name="incorrect_step_length">Incorrect length format! Go to the Settings to change it!</string>
 
-    <string name="quit">Quit</string>
-
+    <string name="quit">Esci</string>
+    
+    <string name="title_section1">Statistiche personali</string>
+    <string name="title_section2">Statistiche globali</string>
+    <string name="title_section3">Obiettivi globali</string>
+    
 </resources>
